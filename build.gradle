@@ -32,6 +32,7 @@ repositories {
 dependencies {
 	compileOnly 'org.projectlombok:lombok:1.18.30'  // Specify the Lombok version
 	annotationProcessor 'org.projectlombok:lombok:1.18.30'
+	implementation 'com.sun.mail:javax.mail:1.6.2'
 	testImplementation 'org.junit.jupiter:junit-jupiter-api:5.10.0'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }

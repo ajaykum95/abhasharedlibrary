@@ -1,5 +1,8 @@
 package com.abha.sharedlibrary.shared.common;
 
+import com.abha.sharedlibrary.shared.constants.AppConstant;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
 import lombok.experimental.UtilityClass;
 
 /**
@@ -19,5 +22,12 @@ public class Utils {
    */
   public void test() {
     System.out.println("testing");
+  }
+  public ZonedDateTime getDatePlusDays(int days) {
+    ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of(AppConstant.ASIA_KOLKATA));
+    if (days > 0) {
+      return zonedDateTime.plusDays(days);
+    }
+    return zonedDateTime;
   }
 }
