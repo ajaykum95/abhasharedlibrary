@@ -16,13 +16,6 @@ import lombok.experimental.UtilityClass;
 @UtilityClass
 public class Utils {
 
-  /**
-   * Prints a test message to the console.
-   * This is a sample utility method.
-   */
-  public void test() {
-    System.out.println("testing");
-  }
   public ZonedDateTime getDatePlusDays(int days) {
     ZonedDateTime zonedDateTime = ZonedDateTime.now(ZoneId.of(AppConstant.ASIA_KOLKATA));
     if (days > 0) {

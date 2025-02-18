@@ -10,5 +10,5 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignupResponse {
-  private Integer subscriberId;
+  private Long subscriberId;
 }
