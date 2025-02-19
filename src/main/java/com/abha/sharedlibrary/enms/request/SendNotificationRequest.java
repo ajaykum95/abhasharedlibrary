@@ -1,22 +1,18 @@
 package com.abha.sharedlibrary.enms.request;
 
-import lombok.AllArgsConstructor;
+import com.abha.sharedlibrary.enms.enums.Language;
+import com.abha.sharedlibrary.enms.enums.NotificationType;
 import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
-@Setter
+@Data
 @Builder
 public class SendNotificationRequest {
   private SmsMetadata smsInfo;
   private WhatsappMetadata whatsappInfo;
   private EmailMetadata emailInfo;
-  private String preferredLanguage;
-  private Integer customerId;
-  private String notificationType;
+  private Language preferredLanguage;
+  private Long customerId;
+  private NotificationType notificationType;
   private String createdBy;
 }
