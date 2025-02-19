@@ -14,8 +14,9 @@ import lombok.Setter;
 @Setter
 @Builder
 public class SubscriberDetailsRequest {
+  private Long appSubscriberId;
   private String phone;
-  private String reference;
+  private String entityReference;
   private String companyName;
   private String website;
   private String companySize;
