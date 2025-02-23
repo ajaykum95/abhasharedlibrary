@@ -4,5 +4,6 @@ public enum ActivityStatus {
   PENDING,
   HOLD,
   REJECTED,
-  DONE
+  DONE,
+  REFUNDED
 }
