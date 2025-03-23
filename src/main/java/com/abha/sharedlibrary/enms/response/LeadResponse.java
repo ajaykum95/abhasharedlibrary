@@ -1,6 +1,7 @@
-package com.abha.sharedlibrary.shared.common.response;
+package com.abha.sharedlibrary.enms.response;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,9 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CommonResponse {
+@Builder
+public class LeadResponse {
+  private Long leadId;
   private boolean success;
   private String message;
 }

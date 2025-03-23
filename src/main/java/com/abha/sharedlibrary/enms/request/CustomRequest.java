@@ -1,6 +1,7 @@
-package com.abha.sharedlibrary.shared.common.response;
+package com.abha.sharedlibrary.enms.request;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,7 +10,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class CommonResponse {
-  private boolean success;
-  private String message;
+@Builder
+public class CustomRequest {
+  private String fieldName;
+  private String fieldValue;
 }
