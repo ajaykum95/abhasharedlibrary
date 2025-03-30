@@ -23,29 +23,29 @@ import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFCellStyle;
 import org.apache.poi.xssf.usermodel.XSSFDataFormat;
-import org.apache.poi.xssf.usermodel.XSSFRow;
-import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 @Slf4j
 public class ExcelFileUtil {
-  public static <T> XSSFWorkbook createExcel(List<T> dataList, String fileName) {
+  private static final String DEFAULT_SHEET_NAME = "Sheet1";
+
+  public static <T> XSSFWorkbook createExcel(List<T> dataList, String fileName, String sheetName) {
     if (CollectionUtils.isEmpty(dataList)) {
-      throw new RuntimeException("Data list cannot be empty!");
+      throw new RuntimeException("Data list can not be empty!");
     }
 
     XSSFWorkbook workbook = new XSSFWorkbook();
-    XSSFSheet sheet = workbook.createSheet(fileName);
-    XSSFRow headerRow = sheet.createRow(0);
+    Sheet sheet =
+        workbook.createSheet(Objects.nonNull(sheetName) ? sheetName : DEFAULT_SHEET_NAME);
+    Row headerRow = sheet.createRow(0);
 
-    Class<?> classType = dataList.getFirst().getClass();
+    Class<?> classType = dataList.get(0).getClass();
 
     List<Field> excelFields = Arrays.stream(classType.getDeclaredFields())
         .filter(field -> field.isAnnotationPresent(ExcelHeader.class))
         .sorted(Comparator.comparingInt(field -> field.getAnnotation(ExcelHeader.class).columnIndex()))
         .toList();
 
-    // Create header row
     for (int i = 0; i < excelFields.size(); i++) {
       ExcelHeader header = excelFields.get(i).getAnnotation(ExcelHeader.class);
       headerRow.createCell(i).setCellValue(header.headerName());
@@ -53,7 +53,7 @@ public class ExcelFileUtil {
 
     int rowNum = 1;
     for (T data : dataList) {
-      XSSFRow row = sheet.createRow(rowNum++);
+      Row row = sheet.createRow(rowNum++);
       for (int i = 0; i < excelFields.size(); i++) {
         Field field = excelFields.get(i);
         field.setAccessible(true);
@@ -85,11 +85,11 @@ public class ExcelFileUtil {
     } else if (value instanceof Date) {
       XSSFCellStyle cellStyle = workbook.createCellStyle();
       XSSFDataFormat dateFormat = workbook.createDataFormat();
-      cellStyle.setDataFormat(dateFormat.getFormat("yyyy-MM-dd")); // Date format
+      cellStyle.setDataFormat(dateFormat.getFormat("yyyy-MM-dd"));
       cell.setCellStyle(cellStyle);
       cell.setCellValue((Date) value);
     } else {
-      cell.setCellValue(value.toString()); // Default to String
+      cell.setCellValue(value.toString());
     }
   }
 
@@ -185,7 +185,8 @@ public class ExcelFileUtil {
         if (DateUtil.isCellDateFormatted(cell)) {
           yield cell.getDateCellValue().toString();
         }
-        yield String.valueOf((long) cell.getNumericCellValue());
+        yield String.valueOf(
+            (long) cell.getNumericCellValue());
       }
       case BOOLEAN -> String.valueOf(cell.getBooleanCellValue());
       case FORMULA -> cell.getCellFormula();
