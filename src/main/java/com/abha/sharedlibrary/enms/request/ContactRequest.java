@@ -16,5 +16,6 @@ public class ContactRequest {
   private String name;
   private String title;
   private String url;
+  private boolean isPrimary;
   private List<ContactTypeRequest> contactDetails;
 }

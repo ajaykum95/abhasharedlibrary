@@ -20,5 +20,5 @@ public class AddressRequest {
   private String state;
   private String zipcode;
   private String country;
-  private boolean isDefault;
+  private boolean isPrimary;
 }

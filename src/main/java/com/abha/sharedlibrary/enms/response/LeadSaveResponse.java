@@ -11,11 +11,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @Builder
-public class LeadResponse {
-  private Long id;
-  private String companyName;
-  private String leadStatus;
-  private String contactName;
-  private String emailAddress;
-  private String phoneNumber;
+public class LeadSaveResponse {
+  private Long leadId;
+  private boolean success;
+  private String message;
 }
