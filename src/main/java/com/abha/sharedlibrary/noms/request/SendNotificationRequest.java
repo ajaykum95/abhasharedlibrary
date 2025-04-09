@@ -1,4 +1,4 @@
-package com.abha.sharedlibrary.enms.request;
+package com.abha.sharedlibrary.noms.request;
 
 import com.abha.sharedlibrary.enms.enums.Language;
 import com.abha.sharedlibrary.enms.enums.NotificationType;
